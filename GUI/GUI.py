@@ -582,10 +582,10 @@ class UI(QMainWindow):
         ct = contrast(dlist, tlist)
         if pw != 0 and ct != 0:
             if pw < 2*np.pi*1e6:
-                ax.text(0.8, 0.07, f"EIT FWHM = 2$\pi$ x {pw/(1e3*2*np.pi):.2f} $kHz$", transform=ax.transAxes, fontsize=10, va='center', ha='center')
+                ax.text(0.8, 0.07, f"Max $n_g$ = {pw:.0f}", transform=ax.transAxes, fontsize=10, va='center', ha='center')
             else:
-                ax.text(0.8, 0.07, f"EIT FWHM = 2$\pi$ x {pw/(1e6*2*np.pi):.2f} $MHz$", transform=ax.transAxes, fontsize=10, va='center', ha='center')
-            ax.text(0.8, 0.13, f"EIT Contrast = {ct:.3f}", transform=ax.transAxes, fontsize=10, va='center', ha='center')        
+                ax.text(0.8, 0.07, f"Max $n_g$ = {pw:.0f}", transform=ax.transAxes, fontsize=10, va='center', ha='center')
+            ax.text(0.8, 0.13, f"Min $v_g$ = {ct:.0f} $m/s$", transform=ax.transAxes, fontsize=10, va='center', ha='center')        
         else:
             pw = FWHM(dlist, -tlist)
             if pw < 2*np.pi*1e6:
@@ -612,7 +612,7 @@ class UI(QMainWindow):
                 f"$\gamma_p$ = {self.vals['lwp']:.2e} $Hz$" "\n" 
                 f"$\gamma_c$ = {self.vals['lwc']:.2e} $Hz$")
             ax.set_xlabel(r"$\Delta_p$ / kHz")
-        ax.set_ylabel(r"Probe Transmission")
+        ax.set_ylabel(r"Group index $n_g$")
         ax.legend()
         plt.show()
         fig.canvas.mpl_connect('close_event', self.save_dialog)
